@@ -12,6 +12,7 @@ class TweetsController < ApplicationController
 
   def create
     Tweet.create(text: tweet_params[:text], user_id: current_user.id)
+    redirect_to root_path, notice: '投稿が完了しました'
   end
 
   def destroy
@@ -22,6 +23,7 @@ class TweetsController < ApplicationController
   def update
     tweet = Tweet.find(params[:id])
     tweet.update(tweet_params) if tweet.user_id == current_user.id
+    redirect_to root_path, notice: '編集が完了しました'
   end
 
   def edit
@@ -34,7 +36,7 @@ class TweetsController < ApplicationController
 
   private
   def tweet_params
-    params.permit(:text)
+    params.permit(:name, :text)
   end
 
   # ユーザーがサインインしてない時、indexアクションを実行する

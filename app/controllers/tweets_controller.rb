@@ -23,6 +23,7 @@ class TweetsController < ApplicationController
   def update
     tweet = Tweet.find(params[:id])
     tweet.update(tweet_params) if tweet.user_id == current_user.id
+    redirect_to root_path, notice: '編集が完了しました'
   end
 
   def edit
